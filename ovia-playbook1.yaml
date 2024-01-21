@@ -2,6 +2,7 @@
 - name: Ping Target
   hosts: 3.128.172.141
   become: yes
+  gather_facts: no
   tasks:
     - name: Ping the host
       ping:
