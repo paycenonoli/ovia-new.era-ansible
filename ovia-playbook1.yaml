@@ -6,5 +6,15 @@
     - name: Ping the host
       ping:
 
-  
+    - name: Check Disk Space
+      shell: df -h
+      register: disk_space_output
+
+    - name: Show Disk Space Output
+      debug:
+        var: disk_space_output.stdout_lines
+    - name: Update Package
+      apt:
+        update_cache: yes
+
     
