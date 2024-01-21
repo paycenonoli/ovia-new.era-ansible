@@ -1,6 +1,6 @@
 ---
 - name: Ping Target
-  hosts: 18.225.55.208
+  hosts: 18.117.11.183
   become: yes
   gather_facts: no
   #become_user: "{{ ansible_user }}"
@@ -24,6 +24,9 @@
       apt:
         name: nginx
         state: present
+      notify: Start nginx
+
+  handlers:
     - name: Start nginx
       service:
         name: nginx
