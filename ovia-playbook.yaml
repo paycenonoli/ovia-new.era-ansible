@@ -3,13 +3,10 @@
   hosts: 18.117.11.183
   become: yes
   gather_facts: no
-  #become_user: "{{ ansible_user }}"
-  #vars:
-  #  ansible_user: ubuntu
-  vars:
-    packages:
-      - nginx
-      - git
+  # vars:
+  #   packages:
+  #     - nginx
+  #     - git
   tasks:
     - name: Ping the host
       ping:
@@ -29,7 +26,9 @@
         name: "{{ item }}"
         update_cache: yes
         state: present
-      loop: "{{ packages }}"
+      loop:
+        - nginx
+        - git
       notify: Start services
 
   handlers:
@@ -37,6 +36,8 @@
       service:
         name: "{{ item }}"
         state: started
-        loop: "{{ packages }}"
+        loop:
+          - nginx
+          - git
           
          
