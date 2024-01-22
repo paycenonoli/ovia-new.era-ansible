@@ -6,6 +6,10 @@
   #become_user: "{{ ansible_user }}"
   #vars:
   #  ansible_user: ubuntu
+  vars:
+    packages:
+      - nginx
+      - git
   tasks:
     - name: Ping the host
       ping:
@@ -20,16 +24,19 @@
     - name: Update Package
       apt:
         update_cache: yes
-    - name: Install nginx
+    - name: Install packages
       apt:
-        name: nginx
+        name: "{{ item }}"
+        update_cache: yes
         state: present
-      notify: Start nginx
+      loop: "{{ packages }}"
+      notify: Start services
 
   handlers:
-    - name: Start nginx
+    - name: Start services
       service:
-        name: nginx
+        name: "{{ item }}"
         state: started
-
-    
+        loop: "{{ packages }}"
+          
+         
