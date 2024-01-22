@@ -1,0 +1,7 @@
+# defaults file for ovia-role
+---
+hosts: 18.220.150.103
+#   packages:
+  #     - nginx
+  #     - git
+  

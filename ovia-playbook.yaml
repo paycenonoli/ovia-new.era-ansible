@@ -1,43 +1,10 @@
 ---
 - name: Ping Target
-  hosts: 18.117.11.183
+  hosts: 18.220.150.103
   become: yes
   gather_facts: no
-  # vars:
-  #   packages:
-  #     - nginx
-  #     - git
-  tasks:
-    - name: Ping the host
-      ping:
-
-    - name: Check Disk Space
-      shell: df -h
-      register: disk_space_output
-
-    - name: Show Disk Space Output
-      debug:
-        var: disk_space_output.stdout_lines
-    - name: Update Package
-      apt:
-        update_cache: yes
-    - name: Install packages
-      apt:
-        name: "{{ item }}"
-        update_cache: yes
-        state: present
-      loop:
-        - nginx
-        - git
-      notify: Start services
-
-  handlers:
-    - name: Start services
-      service:
-        name: "{{ item }}"
-        state: started
-        loop:
-          - nginx
-          - git
+  roles:
+    - ovia-role
+  
           
          

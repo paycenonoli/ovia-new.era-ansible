@@ -1,0 +1,9 @@
+# handlers file for ovia-role
+---
+  - name: Start services
+    service:
+      name: "{{ item }}"
+      state: started
+      loop:
+        - nginx
+        - git
